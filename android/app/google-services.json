@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "295908173417",
+    "project_id": "mohadraty-2b6f9",
+    "storage_bucket": "mohadraty-2b6f9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:295908173417:android:395385d7793f701c38a4f8",
+        "android_client_info": {
+          "package_name": "com.example.mohadraty"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmmcWYaLeQ4yfNZxLsJUfgKGnvT54fVNM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:295908173417:android:ae4b9288ba49f67738a4f8",
+        "android_client_info": {
+          "package_name": "com.example.mohdraty"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmmcWYaLeQ4yfNZxLsJUfgKGnvT54fVNM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
