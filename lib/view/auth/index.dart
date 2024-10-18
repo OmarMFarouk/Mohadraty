@@ -31,6 +31,7 @@ class _AuthIndexState extends State<AuthIndex> {
       },
       child: Scaffold(
         body: PageView(
+            physics: const NeverScrollableScrollPhysics(),
             controller: pageController,
             children: [
               WelcomeScreen(

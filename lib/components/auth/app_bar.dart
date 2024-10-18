@@ -7,6 +7,7 @@ class AuthAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
       foregroundColor: Colors.white,
+      automaticallyImplyLeading: false,
       backgroundColor: Colors.transparent,
       title: Padding(
         padding: const EdgeInsets.only(left: 10),

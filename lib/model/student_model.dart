@@ -1,30 +1,43 @@
-class Lecture {
+class StudentLecture {
   String? id;
   String? title;
   String? courseId;
+  String? qrDuration;
+  String? qrCode;
   String? dateCreated;
+  bool? isAttended;
 
-  Lecture({this.id, this.title, this.courseId, this.dateCreated});
+  StudentLecture(
+      {this.id,
+      this.qrCode,
+      this.qrDuration,
+      this.title,
+      this.courseId,
+      this.isAttended,
+      this.dateCreated});
 
-  Lecture.fromJson(Map<String, dynamic> json) {
+  StudentLecture.fromJson(Map<String, dynamic> json) {
     id = json['lecture_id'];
     title = json['lecture_title'];
     courseId = json['lecture_courseId'];
+    qrCode = json['lecture_qrCode'];
+    qrDuration = json['lecture_qrDuration'];
+    isAttended = json['is_attended'] == 'true' ? true : false;
     dateCreated = json['lecture_dateCreated'];
   }
 }
 
-class MainModel {
+class StudentModel {
   bool? success;
   String? message;
   String? dow;
-  UserInfo? userInfo;
-  List<UserCourse?>? userCourses;
-  List<UserCourse?>? todayCourses;
-  List<UserCourse?>? enabledCourses;
-  List<UserCourse?>? disabledCourses;
+  StudentInfo? userInfo;
+  List<StudentCourse?>? userCourses;
+  List<StudentCourse?>? todayCourses;
+  List<StudentCourse?>? enabledCourses;
+  List<StudentCourse?>? disabledCourses;
 
-  MainModel({
+  StudentModel({
     this.success,
     this.dow,
     this.message,
@@ -35,48 +48,48 @@ class MainModel {
     this.todayCourses,
   });
 
-  MainModel.fromJson(Map<String, dynamic> json) {
+  StudentModel.fromJson(Map<String, dynamic> json) {
     dow = json['dow'];
     if (json['user_courses'] != null) {
-      todayCourses = <UserCourse>[];
+      todayCourses = <StudentCourse>[];
       json['user_courses'].forEach((v) {
-        if (UserCourse.fromJson(v).isEnabled! &&
-            UserCourse.fromJson(v).isToday!) {
-          todayCourses!.add(UserCourse.fromJson(v));
+        if (StudentCourse.fromJson(v).isEnabled! &&
+            StudentCourse.fromJson(v).isToday!) {
+          todayCourses!.add(StudentCourse.fromJson(v));
         }
       });
     }
     if (json['user_courses'] != null) {
-      enabledCourses = <UserCourse>[];
+      enabledCourses = <StudentCourse>[];
       json['user_courses'].forEach((v) {
-        if (UserCourse.fromJson(v).isEnabled!) {
-          enabledCourses!.add(UserCourse.fromJson(v));
+        if (StudentCourse.fromJson(v).isEnabled!) {
+          enabledCourses!.add(StudentCourse.fromJson(v));
         }
       });
     }
     if (json['user_courses'] != null) {
-      disabledCourses = <UserCourse>[];
+      disabledCourses = <StudentCourse>[];
       json['user_courses'].forEach((v) {
-        if (!UserCourse.fromJson(v).isEnabled!) {
-          disabledCourses!.add(UserCourse.fromJson(v));
+        if (!StudentCourse.fromJson(v).isEnabled!) {
+          disabledCourses!.add(StudentCourse.fromJson(v));
         }
       });
     }
     success = json['success'];
     message = json['message'];
     userInfo = json['user_info'] != null
-        ? UserInfo?.fromJson(json['user_info'])
+        ? StudentInfo?.fromJson(json['user_info'])
         : null;
     if (json['user_courses'] != null) {
-      userCourses = <UserCourse>[];
+      userCourses = <StudentCourse>[];
       json['user_courses'].forEach((v) {
-        userCourses!.add(UserCourse.fromJson(v));
+        userCourses!.add(StudentCourse.fromJson(v));
       });
     }
   }
 }
 
-class UserCourse {
+class StudentCourse {
   String? id;
   String? adminId;
   String? code;
@@ -91,9 +104,9 @@ class UserCourse {
   String? dateCreated;
   String? author;
   bool? isToday;
-  List<Lecture?>? lectures;
+  List<StudentLecture?>? lectures;
 
-  UserCourse(
+  StudentCourse(
       {this.id,
       this.adminId,
       this.code,
@@ -110,7 +123,7 @@ class UserCourse {
       this.author,
       this.lectures});
 
-  UserCourse.fromJson(Map<String, dynamic> json) {
+  StudentCourse.fromJson(Map<String, dynamic> json) {
     id = json['course_id'];
     adminId = json['course_adminId'];
     author = json['course_author'];
@@ -128,35 +141,39 @@ class UserCourse {
     dateCreated = json['course_dateCreated'];
     isToday = json['is_today'] == 'true' ? true : false;
     if (json['lectures'] != null) {
-      lectures = <Lecture>[];
+      lectures = <StudentLecture>[];
       json['lectures'].forEach((v) {
-        lectures!.add(Lecture.fromJson(v));
+        lectures!.add(StudentLecture.fromJson(v));
       });
     }
   }
 }
 
-class UserInfo {
+class StudentInfo {
   String? id;
   String? name;
   String? email;
   String? status;
   String? type;
+  String? image;
   String? lastAccess;
   String? dateJoined;
 
-  UserInfo({
+  StudentInfo({
     this.id,
     this.name,
     this.email,
     this.status,
+    this.image,
     this.type,
     this.lastAccess,
     this.dateJoined,
   });
 
-  UserInfo.fromJson(Map<String, dynamic> json) {
+  StudentInfo.fromJson(Map<String, dynamic> json) {
     id = json['user_id'];
+
+    image = json['user_image'];
     name = json['user_name'];
     email = json['user_email'];
     status = json['user_status'];

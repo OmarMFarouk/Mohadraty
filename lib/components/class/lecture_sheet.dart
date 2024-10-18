@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mohadraty/components/class/lecture_tile.dart';
-import 'package:mohadraty/model/main_model.dart';
+import 'package:mohadraty/model/student_model.dart';
 
 import '../../src/app_colors.dart';
 
@@ -8,7 +8,7 @@ class LectureSheet extends StatelessWidget {
   const LectureSheet(
       {super.key, required this.consta, required this.courseDetails});
   final BoxConstraints consta;
-  final UserCourse courseDetails;
+  final StudentCourse courseDetails;
 
   @override
   Widget build(BuildContext context) {

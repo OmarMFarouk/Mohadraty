@@ -9,6 +9,7 @@ import '../../components/auth/app_bar.dart';
 import '../../components/auth/button.dart';
 import '../../components/auth/formfield.dart';
 import '../../components/auth/options.dart';
+import '../../components/auth/role_widget.dart';
 import '../../src/app_navigator.dart';
 import 'splash_screen.dart';
 
@@ -124,6 +125,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               hint: 'Password',
                               obscure: true,
                             ),
+                            RoleWidget(cubit: cubit, consta: consta),
                             Center(
                                 child: AuthButton(
                                     consta: consta,

@@ -1,6 +1,7 @@
 // ignore_for_file: unused_import
 
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -8,7 +9,7 @@ import 'package:mohadraty/bloc/main_bloc/main_cubit.dart';
 import 'package:mohadraty/bloc/main_bloc/main_states.dart';
 import 'package:mohadraty/components/class/class_details_field.dart';
 import 'package:mohadraty/components/class/lecture_tile.dart';
-import 'package:mohadraty/model/main_model.dart';
+import 'package:mohadraty/model/student_model.dart';
 import 'package:mohadraty/src/app_colors.dart';
 import 'package:mohadraty/src/app_shared.dart';
 
@@ -16,7 +17,7 @@ import '../components/class/lecture_sheet.dart';
 
 class ClassDetailsScreen extends StatefulWidget {
   const ClassDetailsScreen({super.key, required this.courseDetails});
-  final UserCourse courseDetails;
+  final StudentCourse courseDetails;
   @override
   State<ClassDetailsScreen> createState() => _ClassDetailsScreenState();
 }
@@ -25,7 +26,8 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen> {
   @override
   void initState() {
     if (AppShared.localStorage.getBool('course-${widget.courseDetails.id}') ==
-        null) {
+            null &&
+        !kIsWeb) {
       AppShared.localStorage
               .setBool('course-${widget.courseDetails.id}', true) ==
           FirebaseMessaging.instance

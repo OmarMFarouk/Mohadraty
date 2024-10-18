@@ -11,6 +11,11 @@ class MainFailure extends MainStates {
 
 class MainSuccess extends MainStates {}
 
+class MainGenQr extends MainStates {
+  String qrCode = '';
+  MainGenQr(this.qrCode);
+}
+
 class MainAdded extends MainStates {
   String msg = '';
   MainAdded(this.msg);

@@ -4,7 +4,7 @@ import 'package:mohadraty/src/app_navigator.dart';
 import 'package:mohadraty/view/class_screen.dart';
 
 import '../../bloc/main_bloc/main_cubit.dart';
-import '../../model/main_model.dart';
+import '../../model/student_model.dart';
 
 class ClassTile extends StatelessWidget {
   const ClassTile(
@@ -12,7 +12,7 @@ class ClassTile extends StatelessWidget {
       required this.isHome,
       required this.consta,
       required this.courseDetails});
-  final UserCourse courseDetails;
+  final StudentCourse courseDetails;
   final BoxConstraints consta;
   final bool isHome;
 

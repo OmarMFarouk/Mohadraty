@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:mohadraty/src/app_colors.dart';
 
 class NotificationsTile extends StatelessWidget {
-  const NotificationsTile({super.key, required this.consta});
+  const NotificationsTile(
+      {super.key,
+      required this.date,
+      required this.title,
+      required this.consta});
   final BoxConstraints consta;
-
+  final String date, title;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -18,7 +22,7 @@ class NotificationsTile extends StatelessWidget {
                     color: AppColors.primary.withAlpha(100),
                     borderRadius: BorderRadius.circular(7)),
                 child: const Icon(
-                  Icons.check_box,
+                  Icons.notifications_active,
                   color: AppColors.primary,
                 )),
             SizedBox(width: consta.maxWidth * 0.02),
@@ -26,8 +30,8 @@ class NotificationsTile extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Attendance checked for class Digital Electronics',
+                  Text(
+                    title,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -37,7 +41,7 @@ class NotificationsTile extends StatelessWidget {
                   ),
                   SizedBox(height: consta.maxHeight * 0.002),
                   Text(
-                    '2024-10-10',
+                    date,
                     maxLines: 1,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,

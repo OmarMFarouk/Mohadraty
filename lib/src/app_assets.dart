@@ -26,6 +26,7 @@ class AppAssets {
   static String scanQrIcon = '$iconPath/scan_qr.png';
 
   // Illustrations
+  static String logo = '$illuPath/logo.PNG';
   static String ideaIllu = '$illuPath/idea.png';
   static String attendanceIllu = '$illuPath/attendance.png';
   static String timeIllu = '$illuPath/time.png';

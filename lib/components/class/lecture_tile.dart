@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mohadraty/model/main_model.dart';
+import 'package:mohadraty/model/student_model.dart';
 import 'package:mohadraty/src/app_colors.dart';
 
 class LecturesTile extends StatelessWidget {
@@ -10,7 +10,7 @@ class LecturesTile extends StatelessWidget {
       required this.consta,
       required this.index});
   final BoxConstraints consta;
-  final Lecture lectureDetails;
+  final StudentLecture lectureDetails;
   final int index, length;
   @override
   Widget build(BuildContext context) {
@@ -22,11 +22,17 @@ class LecturesTile extends StatelessWidget {
                 width: consta.maxWidth * 0.125,
                 height: consta.maxHeight * 0.07,
                 decoration: BoxDecoration(
-                    color: AppColors.red.withAlpha(100),
+                    color: lectureDetails.isAttended!
+                        ? AppColors.primary.withAlpha(100)
+                        : AppColors.red.withAlpha(100),
                     borderRadius: BorderRadius.circular(7)),
-                child: const Icon(
-                  Icons.indeterminate_check_box,
-                  color: AppColors.red,
+                child: Icon(
+                  lectureDetails.isAttended!
+                      ? Icons.check_box
+                      : Icons.indeterminate_check_box,
+                  color: lectureDetails.isAttended!
+                      ? AppColors.primary
+                      : AppColors.red,
                 )),
             SizedBox(width: consta.maxWidth * 0.02),
             Expanded(

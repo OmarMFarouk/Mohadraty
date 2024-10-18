@@ -6,9 +6,9 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import '../src/app_shared.dart';
 
 Future<void> handleBackgroundMessage(RemoteMessage remoteMessage) async {
-  log('title ${remoteMessage.notification!.title}');
-  log('body ${remoteMessage.notification!.body}');
-  log('payload ${remoteMessage.data}');
+  // log('title ${remoteMessage.notification!.title}');
+  // log('body ${remoteMessage.notification!.body}');
+  // log('payload ${remoteMessage.data}');
 }
 
 class NotificationService {
@@ -42,6 +42,7 @@ class NotificationService {
             notification.body,
             NotificationDetails(
                 android: AndroidNotificationDetails(
+                    enableVibration: true,
                     importance: Importance.max,
                     priority: Priority.high,
                     androidChannel.id,

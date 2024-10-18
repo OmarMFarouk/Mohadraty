@@ -24,5 +24,11 @@ class AppShared {
     localStorage.getString('token') == null
         ? localStorage.setString('token', '')
         : null;
+    localStorage.getStringList('notes') == null
+        ? localStorage.setStringList('notes', [])
+        : null;
+    localStorage.getStringList('notes_dates') == null
+        ? localStorage.setStringList('notes_dates', [])
+        : null;
   }
 }

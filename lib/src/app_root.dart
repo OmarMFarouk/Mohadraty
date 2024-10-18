@@ -16,7 +16,7 @@ class AppRoot extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => MainCubit()),
+        BlocProvider(create: (context) => MainCubit()..initialize(context)),
         BlocProvider(create: (context) => AuthCubit())
       ],
       child: SafeArea(

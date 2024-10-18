@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mohadraty/bloc/main_bloc/main_cubit.dart';
 import 'package:mohadraty/bloc/main_bloc/main_states.dart';
 import 'package:mohadraty/components/settings/notification_tile.dart';
+import 'package:mohadraty/src/app_shared.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
@@ -12,6 +15,22 @@ class NotificationScreen extends StatefulWidget {
 }
 
 class _NotificationScreenState extends State<NotificationScreen> {
+  List notes = [];
+  List dates = [];
+  @override
+  void initState() {
+    for (var note in AppShared.localStorage.getStringList('notes')!) {
+      notes.add(note);
+    }
+    for (var date in AppShared.localStorage.getStringList('notes_dates')!) {
+      dates.add(date);
+    }
+    setState(() {});
+    log(notes.toString());
+    log(dates.toString());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MainCubit, MainStates>(
@@ -74,10 +93,12 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   ),
                                   Expanded(
                                     child: ListView.separated(
-                                      itemCount: 10,
+                                      itemCount: notes.length,
                                       shrinkWrap: true,
                                       itemBuilder: (context, index) =>
                                           NotificationsTile(
+                                        date: dates[index],
+                                        title: notes[index],
                                         consta: consta,
                                       ),
                                       separatorBuilder: (context, index) =>

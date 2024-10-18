@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mohadraty/components/auth/button.dart';
+import 'package:mohadraty/src/app_assets.dart';
 import 'package:mohadraty/src/app_colors.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -14,15 +15,20 @@ class WelcomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'Welcome to Mohadraty',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 42,
-                  color: Colors.white,
-                  decorationColor: Colors.black,
-                  letterSpacing: 1),
+            Image.asset(
+              AppAssets.logo,
+              scale: 7,
+            ),
+            const Center(
+              child: Text(
+                'Welcome to Mohadraty',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 42,
+                    color: Colors.white,
+                    decorationColor: Colors.black,
+                    letterSpacing: 1),
+              ),
             ),
             const SizedBox(height: kToolbarHeight * 0.5),
             AuthButton(

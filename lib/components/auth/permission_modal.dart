@@ -1,10 +1,10 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
 import 'package:mohadraty/services/location.dart';
 
 import '../../services/notification.dart';
 import '../../src/app_colors.dart';
 import '../../src/app_shared.dart';
+import '../../view/auth/index.dart';
 import 'button.dart';
 import '../../src/app_navigator.dart';
 
@@ -13,14 +13,13 @@ class PermissionModalSheet extends StatelessWidget {
   final BoxConstraints consta;
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 1.05 / 1,
-      child: Container(
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
-          color: AppColors.fillColor,
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+    return Container(
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+        color: AppColors.fillColor,
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+      child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -46,14 +45,13 @@ class PermissionModalSheet extends StatelessWidget {
                 consta: consta,
                 hint: 'Continue',
                 onTap: () async {
-                  await dotenv.load(fileName: "assets/env/.env");
+                  await AppShared.localStorage.setBool('onboarded', true);
                   await Future.wait([
                     NotificationService.initFCM(),
                     LocationService().requestPermission(),
-                    AppShared.localStorage.setBool('onboarded', true)
                   ]);
-                  // ignore: use_build_context_synchronously
-                  AppNavigator.pop(context);
+                  AppNavigator.pushR(context, const AuthIndex(),
+                      NavigatorAnimation.slideAnimation);
                 },
               ),
             )

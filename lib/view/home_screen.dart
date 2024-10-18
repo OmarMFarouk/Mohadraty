@@ -49,13 +49,14 @@ class _HomeScreenState extends State<HomeScreen> {
             backgroundColor: const Color(0xFF141416),
             bottomSheet: ClassesSheet(
                 cubit: cubit,
+                isDash: false,
                 consta: consta,
                 controller: draggableScrollableController),
             body: LayoutBuilder(builder: (context, consta) {
               return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: LiquidPullToRefresh(
-                    onRefresh: () => cubit.fetchMainData(),
+                    onRefresh: () => cubit.fetchStudentData(),
                     showChildOpacityTransition: false,
                     backgroundColor: AppColors.primary,
                     color: Colors.transparent,
@@ -67,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             SizedBox(height: consta.maxHeight * 0.02),
                             Text(
-                              'Welcome Back, ${mainModel!.userInfo!.name}',
+                              'Welcome Back, ${studentModel!.userInfo!.name}',
                               style: const TextStyle(
                                   color: Color(0xffffffEF),
                                   fontWeight: FontWeight.bold,
@@ -118,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               cubit: cubit,
                                               onTap: () => AppNavigator.push(
                                                   context,
-                                                  const ClasessScreen(),
+                                                  ClasessScreen(isDash: false),
                                                   NavigatorAnimation
                                                       .slideAnimation),
                                               isRed: true,

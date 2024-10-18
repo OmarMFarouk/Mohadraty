@@ -110,6 +110,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             curve: Curves.fastLinearToSlowEaseIn);
                       } else {
                         await showModalBottomSheet(
+                            backgroundColor: Colors.transparent,
                             isDismissible: false,
                             isScrollControlled: true,
                             enableDrag: false,
@@ -117,9 +118,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             builder: (context) => PermissionModalSheet(
                                   consta: consta,
                                 ));
-                        // ignore: use_build_context_synchronously
-                        AppNavigator.pushR(context, const AuthIndex(),
-                            NavigatorAnimation.slideAnimation);
                       }
                     },
                   )

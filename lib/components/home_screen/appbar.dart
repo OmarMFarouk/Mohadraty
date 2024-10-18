@@ -12,6 +12,7 @@ class HomeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: false,
       foregroundColor: Colors.white,
       backgroundColor: Colors.transparent,
       title: Row(

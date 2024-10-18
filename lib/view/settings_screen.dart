@@ -1,3 +1,7 @@
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -8,6 +12,7 @@ import 'package:mohadraty/src/app_colors.dart';
 import 'package:mohadraty/src/app_navigator.dart';
 import 'package:mohadraty/src/app_shared.dart';
 import 'package:mohadraty/view/notification_screen.dart';
+import 'package:restart_app/restart_app.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -17,6 +22,13 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
+  @override
+  void initState() {
+    BlocProvider.of<MainCubit>(context).pickedImage = null;
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MainCubit, MainStates>(
@@ -28,23 +40,12 @@ class _SettingScreenState extends State<SettingScreen> {
               appBar: AppBar(
                 foregroundColor: Colors.white,
                 backgroundColor: Colors.transparent,
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      'Settings',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 22),
-                    ),
-                    IconButton(
-                        onPressed: () => AppNavigator.push(
-                            context,
-                            const NotificationScreen(),
-                            NavigatorAnimation.fadeAnimation),
-                        icon: const Icon(Icons.notifications))
-                  ],
+                title: const Text(
+                  'Settings',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22),
                 ),
               ),
               backgroundColor: const Color(0xFF141416),
@@ -75,13 +76,44 @@ class _SettingScreenState extends State<SettingScreen> {
                                   ),
                                   CircleAvatar(
                                     radius: 75,
+                                    foregroundImage: studentModel == null &&
+                                            tutorModel == null
+                                        ? null
+                                        : CachedNetworkImageProvider(
+                                            studentModel != null
+                                                ? studentModel!.userInfo!.image!
+                                                : tutorModel!
+                                                    .tutorInfo!.image!),
+                                    backgroundImage: BlocProvider.of<MainCubit>(
+                                                    context)
+                                                .pickedImage ==
+                                            null
+                                        ? null
+                                        : FileImage(File(
+                                            BlocProvider.of<MainCubit>(context)
+                                                .pickedImage!
+                                                .path)),
                                     backgroundColor:
                                         AppColors.primary.withAlpha(75),
                                     child: IconButton(
-                                      onPressed: () {},
-                                      icon: const Icon(
-                                        Icons.add_photo_alternate,
-                                        size: 80,
+                                      onPressed: () async {
+                                        await BlocProvider.of<MainCubit>(
+                                                context)
+                                            .updateProfileImage();
+                                        setState(() {});
+                                      },
+                                      icon: Icon(
+                                        BlocProvider.of<MainCubit>(context)
+                                                    .pickedImage ==
+                                                null
+                                            ? Icons.add_photo_alternate
+                                            : Icons.delete,
+                                        size:
+                                            BlocProvider.of<MainCubit>(context)
+                                                        .pickedImage ==
+                                                    null
+                                                ? 80
+                                                : 25,
                                         color: AppColors.primary,
                                       ),
                                     ),
@@ -90,33 +122,68 @@ class _SettingScreenState extends State<SettingScreen> {
                                     height: 20,
                                   ),
                                   SettingsField(
+                                      onTap: () {},
                                       icon: Icons.person,
-                                      hint: mainModel!.userInfo!.name!),
+                                      hint: studentModel != null
+                                          ? studentModel!.userInfo!.name!
+                                          : tutorModel!.tutorInfo!.fullName!),
                                   SettingsField(
-                                      icon: Icons.person,
-                                      hint: mainModel!.userInfo!.email!),
+                                      onTap: () {},
+                                      icon: Icons.email,
+                                      hint: studentModel != null
+                                          ? studentModel!.userInfo!.email!
+                                          : tutorModel!.tutorInfo!.email!),
                                   const Spacer(),
                                   Row(
                                     children: [
-                                      const Expanded(
+                                      Expanded(
                                         child: SettingsField(
+                                            onTap: () {},
                                             icon: Icons.policy_sharp,
                                             hint: 'Policy'),
                                       ),
                                       SizedBox(
-                                        width: consta.maxWidth * 0.05,
+                                        width: consta.maxWidth * 0.03,
                                       ),
-                                      const Expanded(
+                                      Expanded(
                                         child: SettingsField(
+                                            onTap: () {},
                                             icon: FontAwesomeIcons.legal,
                                             hint: 'Terms'),
                                       )
                                     ],
                                   ),
                                   SettingsField(
-                                      icon: Icons.verified_sharp,
-                                      hint:
-                                          'Version: ${AppShared.appInfo.version}'),
+                                      onTap: () => AppNavigator.push(
+                                          context,
+                                          const NotificationScreen(),
+                                          NavigatorAnimation.fadeAnimation),
+                                      icon: Icons.notifications,
+                                      hint: 'Notifications'),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: SettingsField(
+                                            onTap: () {},
+                                            icon: Icons.verified_sharp,
+                                            hint:
+                                                'Ver: ${AppShared.appInfo.version}'),
+                                      ),
+                                      SizedBox(
+                                        width: consta.maxWidth * 0.03,
+                                      ),
+                                      Expanded(
+                                        child: SettingsField(
+                                            onTap: () async {
+                                              await AppShared.localStorage
+                                                  .setBool('active', false);
+                                              Restart.restartApp();
+                                            },
+                                            icon: FontAwesomeIcons.signOut,
+                                            hint: 'Logout'),
+                                      )
+                                    ],
+                                  ),
                                 ],
                               ),
                             ),

@@ -16,7 +16,7 @@ class AuthCubit extends Cubit<AuthStates> {
   TextEditingController passwordCont = TextEditingController();
   final loginForm = GlobalKey<FormState>();
   final registerForm = GlobalKey<FormState>();
-  bool checkBox = false;
+  bool isStudent = true;
   bool canPop = false;
 
   register() async {
@@ -25,6 +25,7 @@ class AuthCubit extends Cubit<AuthStates> {
       EasyLoading.show(status: 'Loading...');
       await AuthApi()
           .register(
+              type: isStudent ? 'student' : 'tutor',
               name: '${firstNameCont.text} ${lastNameCont.text}',
               email: emailCont.text.toLowerCase(),
               password: passwordCont.text)
@@ -35,7 +36,8 @@ class AuthCubit extends Cubit<AuthStates> {
         }
         if (res['success'] == true) {
           emit(AuthSuccess(res['message']));
-          clearNsave();
+
+          clearNsave(res['user_type']);
           EasyLoading.dismiss();
         } else {
           EasyLoading.dismiss();
@@ -61,7 +63,7 @@ class AuthCubit extends Cubit<AuthStates> {
         }
         if (res['success'] == true) {
           emit(AuthSuccess(res['message']));
-          clearNsave();
+          clearNsave(res['user_type']);
           EasyLoading.dismiss();
         } else {
           EasyLoading.dismiss();
@@ -88,13 +90,14 @@ class AuthCubit extends Cubit<AuthStates> {
     emit(AuthInitial());
   }
 
-  clearNsave() async {
+  clearNsave(userType) async {
     if (firstNameCont.text.isNotEmpty) {
       await AppShared.localStorage
           .setString('name', '${firstNameCont.text} ${lastNameCont.text}');
     }
     await AppShared.localStorage
         .setString('email', emailCont.text.toLowerCase());
+    await AppShared.localStorage.setString('userType', userType);
     await AppShared.localStorage.setBool('active', true);
     firstNameCont.clear();
     lastNameCont.clear();

@@ -5,6 +5,8 @@ import 'package:mohadraty/services/notification.dart';
 import 'package:mohadraty/src/app_assets.dart';
 import 'package:mohadraty/src/app_colors.dart';
 import 'package:mohadraty/src/app_navigator.dart';
+import 'package:mohadraty/src/app_shared.dart';
+import 'package:mohadraty/view/dashboard.dart';
 import 'package:mohadraty/view/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -22,18 +24,19 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   initData() async {
-    await BlocProvider.of<MainCubit>(context).fetchMainData();
     await NotificationService.initFCM();
-    if (mainModel!.userInfo!.type == 'student') {
+    if (AppShared.localStorage.getString('userType') == 'student') {
+      await BlocProvider.of<MainCubit>(context).fetchStudentData();
       Future.delayed(
           const Duration(seconds: 1),
           () => AppNavigator.pushR(
               context, const HomeScreen(), NavigatorAnimation.fadeAnimation));
     } else {
+      await BlocProvider.of<MainCubit>(context).fetchTutorData();
       Future.delayed(
           const Duration(seconds: 1),
-          () => AppNavigator.pushR(
-              context, const SplashScreen(), NavigatorAnimation.fadeAnimation));
+          () => AppNavigator.pushR(context, const DashboardScreen(),
+              NavigatorAnimation.fadeAnimation));
     }
   }
 
