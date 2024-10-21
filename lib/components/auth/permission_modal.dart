@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mohadraty/services/location.dart';
+import 'package:mohadraty/src/app_endpoints.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../services/notification.dart';
 import '../../src/app_colors.dart';
@@ -23,16 +25,29 @@ class PermissionModalSheet extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Permissions Notifier',
-                style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.primary)),
+            Row(
+              children: [
+                const Text('App Notice',
+                    style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.primary)),
+                const Spacer(),
+                IconButton(
+                    tooltip: 'Read Privacy Policy / T&C',
+                    onPressed: () => launchUrl(Uri.parse(AppEndPoints.terms)),
+                    icon: const Icon(
+                      Icons.help_outline,
+                      size: 30,
+                      color: AppColors.primary,
+                    ))
+              ],
+            ),
             const SizedBox(
               height: 10,
             ),
             Text(
-              'Mohadraty will be granted your notifications, location and camera permissions, this is to improve your app experience, make it better and more efficient. All personal information will be handled in accordance with our Privacy Policy, Users have to agree to our Terms&Conditions in order to continue using the app, T&C and privacy policy can be found in the app.',
+              "By using Mohadraty, you agree to our Terms & Conditions. These terms outline your rights and responsibilities, and how we handle your information. Please read them carefully",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: AppColors.grey.withAlpha(200)),

@@ -13,9 +13,7 @@ class MainApi {
   Future fetchStudentData() async {
     try {
       var request = await http.post(Uri.parse(AppEndPoints.studentData), body: {
-        'api_sk': kIsWeb
-            ? dotenv.env['api_sk']
-            : 'd3a0d6f3c7cdf0edcb64c66e74792f033f7da50b',
+        'api_sk': dotenv.env['api_sk'],
         'email': AppShared.localStorage.getString('email')
       });
       if (request.statusCode < 300) {
@@ -32,9 +30,7 @@ class MainApi {
   Future fetchTutorData() async {
     try {
       var request = await http.post(Uri.parse(AppEndPoints.tutorData), body: {
-        'api_sk': kIsWeb
-            ? dotenv.env['api_sk']
-            : 'd3a0d6f3c7cdf0edcb64c66e74792f033f7da50b',
+        'api_sk': dotenv.env['api_sk'],
         'email': AppShared.localStorage.getString('email')
       });
       if (request.statusCode < 300) {
@@ -52,9 +48,7 @@ class MainApi {
       {required String courseCode, required String studentId}) async {
     try {
       var request = await http.post(Uri.parse(AppEndPoints.joinClass), body: {
-        'api_sk': kIsWeb
-            ? dotenv.env['api_sk']
-            : 'd3a0d6f3c7cdf0edcb64c66e74792f033f7da50b',
+        'api_sk': dotenv.env['api_sk'],
         'user_id': studentModel!.userInfo!.id,
         'course_code': courseCode,
         'student_id': studentId,
@@ -74,9 +68,7 @@ class MainApi {
     await LocationService().currentLocation();
     try {
       var request = await http.post(Uri.parse(AppEndPoints.attendClass), body: {
-        'api_sk': kIsWeb
-            ? dotenv.env['api_sk']
-            : 'd3a0d6f3c7cdf0edcb64c66e74792f033f7da50b',
+        'api_sk': dotenv.env['api_sk'],
         'user_id': studentModel!.userInfo!.id,
         'qr_code': qrCode,
         'user_location':
@@ -104,9 +96,7 @@ class MainApi {
       path}) async {
     try {
       Map<String, String> data = {
-        'api_sk': kIsWeb
-            ? dotenv.env['api_sk']!
-            : 'd3a0d6f3c7cdf0edcb64c66e74792f033f7da50b',
+        'api_sk': dotenv.env['api_sk']!,
         'tutor_id': tutorModel!.tutorInfo!.id!,
         'course_title': classTitle,
         'course_code': courseCode,
@@ -142,9 +132,7 @@ class MainApi {
     try {
       var request =
           await http.post(Uri.parse(AppEndPoints.manageReqeust), body: {
-        'api_sk': kIsWeb
-            ? dotenv.env['api_sk']
-            : 'd3a0d6f3c7cdf0edcb64c66e74792f033f7da50b',
+        'api_sk': dotenv.env['api_sk'],
         'course_title': courseTitle,
         'rid': rid,
         'user_id': uid,
@@ -166,9 +154,7 @@ class MainApi {
     try {
       var request =
           await http.post(Uri.parse(AppEndPoints.createLecture), body: {
-        'api_sk': kIsWeb
-            ? dotenv.env['api_sk']
-            : 'd3a0d6f3c7cdf0edcb64c66e74792f033f7da50b',
+        'api_sk': dotenv.env['api_sk'],
         'course_title': courseTitle,
         'lecture_title': lectureTitle,
         'course_id': courseId,
@@ -193,9 +179,7 @@ class MainApi {
   Future updateProfileImage({path}) async {
     try {
       Map<String, String> data = {
-        'api_sk': kIsWeb
-            ? dotenv.env['api_sk']!
-            : 'd3a0d6f3c7cdf0edcb64c66e74792f033f7da50b',
+        'api_sk': dotenv.env['api_sk']!,
         'user_email': AppShared.localStorage.getString('email')!,
       };
 

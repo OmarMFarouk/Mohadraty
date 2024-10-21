@@ -7,7 +7,6 @@ import 'package:mohadraty/bloc/main_bloc/main_states.dart';
 import 'package:mohadraty/components/dashboard/create_class_sheet.dart';
 import 'package:mohadraty/components/dashboard/dash_qr_button.dart';
 import 'package:mohadraty/components/dashboard/gen_qr_dialog.dart';
-import 'package:mohadraty/components/home_screen/add_class_dialog.dart';
 import 'package:mohadraty/components/home_screen/states_dialog.dart';
 import 'package:mohadraty/src/app_colors.dart';
 import 'package:mohadraty/src/app_navigator.dart';
@@ -133,7 +132,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                               cubit: cubit,
                                               onTap: () => AppNavigator.push(
                                                   context,
-                                                  ClasessScreen(
+                                                  const ClasessScreen(
                                                     isDash: true,
                                                   ),
                                                   NavigatorAnimation

@@ -1,5 +1,3 @@
-import 'package:file_saver/file_saver.dart';
-import 'package:flutter/foundation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
@@ -27,7 +25,7 @@ class QrGeneratorDialog extends StatelessWidget {
             color: const Color(0xFF141416),
             borderRadius: BorderRadius.circular(15),
             border: Border.all(color: const Color(0xFFBEFF6C), width: 5)),
-        height: MediaQuery.sizeOf(context).height * (kIsWeb ? 0.45 : 0.4),
+        height: MediaQuery.sizeOf(context).height * 0.4,
         width: MediaQuery.sizeOf(context).width * 0.7,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -50,12 +48,7 @@ class QrGeneratorDialog extends StatelessWidget {
                     consta: const BoxConstraints.expand(),
                     onTap: () async {
                       await controller.capture().then((image) {
-                        if (image != null && !kIsWeb) {
-                          ImageGallerySaver.saveImage(image);
-                        } else if (image != null && kIsWeb) {
-                          FileSaver.instance
-                              .saveFile(name: '$qrCode.png', bytes: image);
-                        }
+                        ImageGallerySaver.saveImage(image!);
                       });
                       Fluttertoast.showToast(msg: 'Saved');
                     },

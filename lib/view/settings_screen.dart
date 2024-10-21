@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -7,12 +6,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mohadraty/bloc/main_bloc/main_cubit.dart';
 import 'package:mohadraty/bloc/main_bloc/main_states.dart';
+import 'package:mohadraty/components/dashboard/courses_dropdown.dart';
+import 'package:mohadraty/components/settings/language_dropdown.dart';
 import 'package:mohadraty/components/settings/setting_field.dart';
 import 'package:mohadraty/src/app_colors.dart';
+import 'package:mohadraty/src/app_endpoints.dart';
 import 'package:mohadraty/src/app_navigator.dart';
 import 'package:mohadraty/src/app_shared.dart';
 import 'package:mohadraty/view/notification_screen.dart';
 import 'package:restart_app/restart_app.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -40,12 +43,20 @@ class _SettingScreenState extends State<SettingScreen> {
               appBar: AppBar(
                 foregroundColor: Colors.white,
                 backgroundColor: Colors.transparent,
-                title: const Text(
-                  'Settings',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 22),
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Settings',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 22),
+                    ),
+                    LanguageDropDown(
+                      consta: consta,
+                    )
+                  ],
                 ),
               ),
               backgroundColor: const Color(0xFF141416),
@@ -138,7 +149,8 @@ class _SettingScreenState extends State<SettingScreen> {
                                     children: [
                                       Expanded(
                                         child: SettingsField(
-                                            onTap: () {},
+                                            onTap: () => launchUrl(Uri.parse(
+                                                AppEndPoints.privacy)),
                                             icon: Icons.policy_sharp,
                                             hint: 'Policy'),
                                       ),
@@ -147,7 +159,8 @@ class _SettingScreenState extends State<SettingScreen> {
                                       ),
                                       Expanded(
                                         child: SettingsField(
-                                            onTap: () {},
+                                            onTap: () => launchUrl(
+                                                Uri.parse(AppEndPoints.terms)),
                                             icon: FontAwesomeIcons.legal,
                                             hint: 'Terms'),
                                       )

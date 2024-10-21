@@ -14,46 +14,46 @@ class RoleWidget extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 20.0),
       child: Row(
         children: [
-          AnimatedContainer(
-            width: !cubit.isStudent
-                ? consta.maxWidth * 0.48
-                : consta.maxWidth * 0.3,
-            duration: Durations.extralong4,
-            curve: Curves.fastEaseInToSlowEaseOut,
-            child: InkWell(
-              borderRadius: BorderRadius.circular(15),
-              onTap: () {
-                cubit.isStudent = false;
-                cubit.refreshState();
-              },
-              child: Ink(
-                height: consta.maxHeight * 0.1,
-                decoration: BoxDecoration(
-                    color: !cubit.isStudent
-                        ? AppColors.primary
-                        : AppColors.fillColor,
-                    borderRadius: BorderRadius.circular(15),
-                    border: Border.all(color: AppColors.primary, width: 2.5)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      FontAwesomeIcons.chalkboardUser,
-                      size: 35,
+          Expanded(
+            child: AnimatedContainer(
+              width: !cubit.isStudent ? null : consta.maxWidth * 0.3,
+              duration: Durations.extralong4,
+              curve: Curves.fastEaseInToSlowEaseOut,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(15),
+                onTap: () {
+                  cubit.isStudent = false;
+                  cubit.refreshState();
+                },
+                child: Ink(
+                  padding: EdgeInsets.all(5),
+                  decoration: BoxDecoration(
                       color: !cubit.isStudent
-                          ? AppColors.black
-                          : AppColors.primary,
-                    ),
-                    Text(
-                      '\t\tTutor',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: !cubit.isStudent
-                              ? AppColors.black
-                              : AppColors.grey),
-                    ),
-                  ],
+                          ? AppColors.primary
+                          : AppColors.fillColor,
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(color: AppColors.primary, width: 2.5)),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        FontAwesomeIcons.chalkboardUser,
+                        size: 35,
+                        color: !cubit.isStudent
+                            ? AppColors.black
+                            : AppColors.primary,
+                      ),
+                      Text(
+                        '\t\tTutor',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: !cubit.isStudent
+                                ? AppColors.black
+                                : AppColors.grey),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -73,7 +73,7 @@ class RoleWidget extends StatelessWidget {
                 cubit.refreshState();
               },
               child: Ink(
-                height: consta.maxHeight * 0.1,
+                padding: EdgeInsets.all(5),
                 decoration: BoxDecoration(
                     color: cubit.isStudent
                         ? AppColors.primary

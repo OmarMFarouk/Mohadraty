@@ -26,8 +26,7 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen> {
   @override
   void initState() {
     if (AppShared.localStorage.getBool('course-${widget.courseDetails.id}') ==
-            null &&
-        !kIsWeb) {
+        null) {
       AppShared.localStorage
               .setBool('course-${widget.courseDetails.id}', true) ==
           FirebaseMessaging.instance

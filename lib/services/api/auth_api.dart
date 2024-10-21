@@ -16,32 +16,28 @@ class AuthApi {
       {required password, required name, required email, required type}) async {
     String? deviceDetails;
     String? deviceId;
-    if (!kIsWeb) {
-      deviceId = await FlutterUdid.udid;
-      DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-      AndroidDeviceInfo androidInfo;
-      IosDeviceInfo iosInfo;
-      if (Platform.isAndroid) {
-        androidInfo = await deviceInfo.androidInfo;
+    deviceId = await FlutterUdid.udid;
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    AndroidDeviceInfo androidInfo;
+    IosDeviceInfo iosInfo;
+    if (Platform.isAndroid) {
+      androidInfo = await deviceInfo.androidInfo;
 
-        deviceDetails =
-            '${androidInfo.model} - Android:${androidInfo.version.release}';
-      } else {
-        iosInfo = await deviceInfo.iosInfo;
-        deviceDetails = '${iosInfo.model} - IOS:${iosInfo.systemVersion}';
-      }
+      deviceDetails =
+          '${androidInfo.model} - Android:${androidInfo.version.release}';
+    } else {
+      iosInfo = await deviceInfo.iosInfo;
+      deviceDetails = '${iosInfo.model} - IOS:${iosInfo.systemVersion}';
     }
     try {
       var request = await http.post(Uri.parse(AppEndPoints.register), body: {
-        'api_sk': kIsWeb
-            ? dotenv.env['api_sk']
-            : 'd3a0d6f3c7cdf0edcb64c66e74792f033f7da50b',
+        'api_sk': dotenv.env['api_sk'],
         'type': type,
         'name': name,
         'password': password,
         'email': email,
-        'device_id': deviceId ?? 'web_${email.hashCode + name.hashCode}',
-        'device_info': deviceDetails ?? 'web',
+        'device_id': deviceId,
+        'device_info': deviceDetails,
         'fcm_token': AppShared.localStorage.getString('token') ?? ''
       });
       log(request.body);
@@ -62,9 +58,7 @@ class AuthApi {
   }) async {
     try {
       var request = await http.post(Uri.parse(AppEndPoints.login), body: {
-        'api_sk': kIsWeb
-            ? dotenv.env['api_sk']
-            : 'd3a0d6f3c7cdf0edcb64c66e74792f033f7da50b',
+        'api_sk': dotenv.env['api_sk'],
         'password': password,
         'email': email,
         'fcm_token': AppShared.localStorage.getString('token')

@@ -1,5 +1,7 @@
 class AppEndPoints {
   static const String baseUrl = 'https://visaino.com/lawyers/test_moh/public';
+  static const String terms = 'https://visaino.com/lawyers/test_moh/terms';
+  static const String privacy = 'https://visaino.com/lawyers/test_moh/privacy';
 
   // Authentication
   static const String register = '$baseUrl/auth/register.php';

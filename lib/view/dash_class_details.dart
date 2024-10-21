@@ -28,8 +28,7 @@ class _DashClassDetailsScreenState extends State<DashClassDetailsScreen> {
   @override
   void initState() {
     if (AppShared.localStorage.getBool('course-${widget.courseDetails.id}') ==
-            null &&
-        !kIsWeb) {
+        null) {
       AppShared.localStorage
               .setBool('course-${widget.courseDetails.id}', true) ==
           FirebaseMessaging.instance
@@ -108,66 +107,60 @@ class _DashClassDetailsScreenState extends State<DashClassDetailsScreen> {
                           ],
                         ),
                       ),
-                      kIsWeb
-                          ? SizedBox()
-                          : Expanded(
-                              flex: 1,
-                              child: Container(
-                                decoration: const BoxDecoration(
-                                    color: AppColors.fillColor,
-                                    borderRadius: BorderRadius.horizontal(
-                                        right: Radius.circular(15))),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      AppShared.localStorage.getBool(
-                                              'course-${widget.courseDetails.id}')!
-                                          ? Icons.notifications
-                                          : Icons.notifications_off,
-                                      size: 35,
-                                      color: AppShared.localStorage.getBool(
-                                              'course-${widget.courseDetails.id}')!
-                                          ? AppColors.primary
-                                          : AppColors.grey,
-                                    ),
-                                    SizedBox(
-                                      height: consta.maxHeight * 0.05,
-                                    ),
-                                    Switch(
-                                      value: AppShared.localStorage.getBool(
-                                          'course-${widget.courseDetails.id}')!,
-                                      onChanged: (s) {
-                                        if (s == false) {
-                                          FirebaseMessaging.instance
-                                              .unsubscribeFromTopic(
-                                                  'course-${widget.courseDetails.id}');
-                                          AppShared.localStorage.setBool(
-                                              'course-${widget.courseDetails.id}',
-                                              s);
-                                        } else {
-                                          FirebaseMessaging.instance
-                                              .subscribeToTopic(
-                                                  'course-${widget.courseDetails.id}');
-                                          AppShared.localStorage.setBool(
-                                              'course-${widget.courseDetails.id}',
-                                              s);
-                                        }
-                                        setState(() {});
-                                      },
-                                      thumbIcon:
-                                          const WidgetStatePropertyAll(Icon(
-                                        Icons.circle,
-                                        size: 35,
-                                        color: AppColors.primary,
-                                      )),
-                                      inactiveTrackColor: AppColors.grey,
-                                      activeColor: AppColors.primary,
-                                    )
-                                  ],
-                                ),
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          decoration: const BoxDecoration(
+                              color: AppColors.fillColor,
+                              borderRadius: BorderRadius.horizontal(
+                                  right: Radius.circular(15))),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                AppShared.localStorage.getBool(
+                                        'course-${widget.courseDetails.id}')!
+                                    ? Icons.notifications
+                                    : Icons.notifications_off,
+                                size: 35,
+                                color: AppShared.localStorage.getBool(
+                                        'course-${widget.courseDetails.id}')!
+                                    ? AppColors.primary
+                                    : AppColors.grey,
                               ),
-                            )
+                              SizedBox(
+                                height: consta.maxHeight * 0.05,
+                              ),
+                              Switch(
+                                value: AppShared.localStorage.getBool(
+                                    'course-${widget.courseDetails.id}')!,
+                                onChanged: (s) {
+                                  if (s == false) {
+                                    FirebaseMessaging.instance
+                                        .unsubscribeFromTopic(
+                                            'course-${widget.courseDetails.id}');
+                                    AppShared.localStorage.setBool(
+                                        'course-${widget.courseDetails.id}', s);
+                                  } else {
+                                    FirebaseMessaging.instance.subscribeToTopic(
+                                        'course-${widget.courseDetails.id}');
+                                    AppShared.localStorage.setBool(
+                                        'course-${widget.courseDetails.id}', s);
+                                  }
+                                  setState(() {});
+                                },
+                                thumbIcon: const WidgetStatePropertyAll(Icon(
+                                  Icons.circle,
+                                  size: 35,
+                                  color: AppColors.primary,
+                                )),
+                                inactiveTrackColor: AppColors.grey,
+                                activeColor: AppColors.primary,
+                              )
+                            ],
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 );

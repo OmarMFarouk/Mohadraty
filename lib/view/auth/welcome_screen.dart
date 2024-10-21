@@ -22,6 +22,7 @@ class WelcomeScreen extends StatelessWidget {
             const Center(
               child: Text(
                 'Welcome to Mohadraty',
+                textAlign: TextAlign.center,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 42,
