@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -21,9 +22,12 @@ class AppRoot extends StatelessWidget {
       ],
       child: SafeArea(
         child: MaterialApp(
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
           debugShowCheckedModeBanner: false,
           builder: EasyLoading.init(),
-          theme: ThemeData(fontFamily: 'Cairo'),
+          theme: ThemeData(fontFamily: 'Cairo', primarySwatch: Colors.red),
           home: AppShared.localStorage.getBool('onboarded') == false
               ? const OnboardingScreen()
               : AppShared.localStorage.getBool('active') == true

@@ -30,5 +30,8 @@ class AppShared {
     localStorage.getStringList('notes_dates') == null
         ? localStorage.setStringList('notes_dates', [])
         : null;
+    localStorage.getBool('changedLocale') == null
+        ? localStorage.setBool('changedLocale', false)
+        : null;
   }
 }

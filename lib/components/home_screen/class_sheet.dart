@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mohadraty/bloc/main_bloc/main_cubit.dart';
 import 'package:mohadraty/components/dashboard/request_tile.dart';
+import 'package:mohadraty/src/app_assets.dart';
 
 import '../class/class_tile.dart';
 
@@ -88,6 +90,9 @@ class _ClassesSheetState extends State<ClassesSheet>
                         fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: widget.consta.maxHeight * 0.02),
+                  tutorModel!.pendingRequests!.isEmpty
+                      ? Image.asset(AppAssets.notFoundIllu)
+                      : const SizedBox(),
                   for (var i = 0;
                       i < BlocProvider.of<MainCubit>(context).pending.length;
                       i++)
@@ -135,14 +140,17 @@ class _ClassesSheetState extends State<ClassesSheet>
                   const SizedBox(
                     height: 20,
                   ),
-                  const Text(
-                    "Today",
-                    style: TextStyle(
+                  Text(
+                    context.tr('today'),
+                    style: const TextStyle(
                         fontSize: 32,
                         color: Colors.white,
                         fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: widget.consta.maxHeight * 0.02),
+                  studentModel!.todayCourses!.isEmpty
+                      ? Image.asset(AppAssets.notFoundIllu)
+                      : const SizedBox(),
                   for (var i = 0; i < studentModel!.todayCourses!.length; i++)
                     ClassTile(
                       isHome: true,

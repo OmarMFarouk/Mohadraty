@@ -31,6 +31,7 @@ class AppAssets {
   static String attendanceIllu = '$illuPath/attendance.png';
   static String timeIllu = '$illuPath/time.png';
   static String freeIllu = '$illuPath/free.png';
+  static String notFoundIllu = '$illuPath/not_found.png';
 
   // Gifs
   static String qrSuccessGIF = '$gifPath/qr_success.gif';

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mohadraty/view/settings_screen.dart';
 
@@ -17,8 +18,8 @@ class HomeAppBar extends StatelessWidget {
       backgroundColor: Colors.transparent,
       title: Row(
         children: [
-          const Text(
-            'Home',
+          Text(
+            context.tr('home'),
             style: TextStyle(
                 color: Colors.white, fontWeight: FontWeight.bold, fontSize: 22),
           ),

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mohadraty/services/location.dart';
 import 'package:mohadraty/src/app_endpoints.dart';
@@ -27,8 +28,8 @@ class PermissionModalSheet extends StatelessWidget {
           children: [
             Row(
               children: [
-                const Text('App Notice',
-                    style: TextStyle(
+                Text(context.tr('app_notice'),
+                    style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                         color: AppColors.primary)),
@@ -47,7 +48,7 @@ class PermissionModalSheet extends StatelessWidget {
               height: 10,
             ),
             Text(
-              "By using Mohadraty, you agree to our Terms & Conditions. These terms outline your rights and responsibilities, and how we handle your information. Please read them carefully",
+              context.tr('agreement'),
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: AppColors.grey.withAlpha(200)),
@@ -58,7 +59,7 @@ class PermissionModalSheet extends StatelessWidget {
             Center(
               child: AuthButton(
                 consta: consta,
-                hint: 'Continue',
+                hint: context.tr('i_agree'),
                 onTap: () async {
                   await AppShared.localStorage.setBool('onboarded', true);
                   await Future.wait([

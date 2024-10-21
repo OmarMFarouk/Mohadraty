@@ -1,13 +1,13 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mohadraty/src/app_colors.dart';
-import 'package:mohadraty/view/auth/index.dart';
 
 import '../../components/auth/button.dart';
 import '../../components/auth/indicators.dart';
 import '../../components/auth/onboarding_template.dart';
 import '../../components/auth/permission_modal.dart';
+import '../../components/settings/language_dropdown.dart';
 import '../../src/app_assets.dart';
-import '../../src/app_navigator.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -19,26 +19,26 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   int currentIndex = 0;
   PageController pageController = PageController(initialPage: 0);
-  List<Widget> onboardingDetails = [
-    OnboardingTemplate(
-      image: AppAssets.timeIllu,
-      subTitle: 'Have all your classes in one place, Goodbye time waste!',
-      title: 'Save Time',
-    ),
-    OnboardingTemplate(
-      image: AppAssets.attendanceIllu,
-      subTitle: 'Easily check your attendance in your classes',
-      title: 'Track Your Progress',
-    ),
-    OnboardingTemplate(
-      image: AppAssets.freeIllu,
-      subTitle:
-          'Supporting students and tutors all around the globe with no limitations',
-      title: 'Always Free',
-    ),
-  ];
+
   @override
   Widget build(BuildContext context) {
+    List<Widget> onboardingDetails = [
+      OnboardingTemplate(
+        image: AppAssets.timeIllu,
+        subTitle: context.tr('onboarding_desc_1'),
+        title: context.tr('onboarding_title_1'),
+      ),
+      OnboardingTemplate(
+        image: AppAssets.attendanceIllu,
+        subTitle: context.tr('onboarding_desc_2'),
+        title: context.tr('onboarding_title_2'),
+      ),
+      OnboardingTemplate(
+        image: AppAssets.freeIllu,
+        subTitle: context.tr('onboarding_desc_3'),
+        title: context.tr('onboarding_title_2'),
+      ),
+    ];
     return Scaffold(
       backgroundColor: AppColors.black,
       body: LayoutBuilder(builder: (context, consta) {
@@ -57,25 +57,33 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         backgroundColor: Colors.transparent,
                       ),
                     )
-                  : InkWell(
-                      borderRadius: BorderRadius.circular(30),
-                      onTap: () => pageController.animateToPage(
-                          currentIndex + 1,
-                          duration: Durations.long4,
-                          curve: Curves.fastLinearToSlowEaseIn),
-                      child: Ink(
-                        child: CircleAvatar(
-                          backgroundColor: AppColors.primary.withAlpha(100),
-                          radius: 30,
-                          child: const Text(
-                            '⪼',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.primary,
-                                fontSize: 24),
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        LanguageDropDown(
+                          consta: consta,
+                        ),
+                        InkWell(
+                          borderRadius: BorderRadius.circular(30),
+                          onTap: () => pageController.animateToPage(
+                              currentIndex + 1,
+                              duration: Durations.long4,
+                              curve: Curves.fastLinearToSlowEaseIn),
+                          child: Ink(
+                            child: CircleAvatar(
+                              backgroundColor: AppColors.primary.withAlpha(100),
+                              radius: 30,
+                              child: const Text(
+                                '⪼',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColors.primary,
+                                    fontSize: 24),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
             ),
             Expanded(
@@ -101,7 +109,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             SizedBox(height: consta.maxHeight * 0.05),
             currentIndex == 2
                 ? AuthButton(
-                    hint: 'Get Started',
+                    hint: context.tr('get_started'),
                     consta: consta,
                     onTap: () async {
                       if (currentIndex != 2) {

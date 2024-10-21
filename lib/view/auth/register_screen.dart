@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mohadraty/bloc/auth_bloc/auth_cubit.dart';
@@ -53,9 +54,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             const SizedBox(
                               height: kToolbarHeight,
                             ),
-                            const Text(
-                              'Create Your\nAccount',
-                              style: TextStyle(
+                            Text(
+                              context.tr('signup'),
+                              style: const TextStyle(
                                   fontSize: 37,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
@@ -77,7 +78,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           return null;
                                         },
                                         controller: cubit.firstNameCont,
-                                        hint: 'First Name')),
+                                        hint: context.tr('first_name'))),
                                 SizedBox(
                                   width: consta.maxWidth * 0.02,
                                 ),
@@ -93,7 +94,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           return null;
                                         },
                                         controller: cubit.lastNameCont,
-                                        hint: 'Last Name')),
+                                        hint: context.tr('first_name'))),
                               ],
                             ),
                             AuthField(
@@ -110,7 +111,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 return null;
                               },
                               controller: cubit.emailCont,
-                              hint: 'Email',
+                              hint: context.tr('email'),
                             ),
                             AuthField(
                               validator: (val) {
@@ -122,29 +123,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 return null;
                               },
                               controller: cubit.passwordCont,
-                              hint: 'Password',
+                              hint: context.tr('password'),
                               obscure: true,
                             ),
                             RoleWidget(cubit: cubit, consta: consta),
                             Center(
                                 child: AuthButton(
                                     consta: consta,
-                                    hint: 'Register',
+                                    hint: context.tr('signup'),
                                     onTap: () => cubit.register())),
                             SizedBox(height: consta.maxHeight * 0.02),
                             AuthOptions(
-                              onTap: () => widget.controller.animateToPage(1,
-                                  curve: Curves.fastLinearToSlowEaseIn,
-                                  duration: const Duration(milliseconds: 350)),
-                              hint: 'Sign In',
-                              title: 'Already Have An Account?',
-                            ),
+                                onTap: () => widget.controller.animateToPage(1,
+                                    curve: Curves.fastLinearToSlowEaseIn,
+                                    duration:
+                                        const Duration(milliseconds: 350)),
+                                hint: context.tr('login'),
+                                title: context.tr('already_msg')),
                           ]),
                     ),
                   )),
             ),
             Positioned(
-                right: consta.maxWidth * 0.075,
+                right: context.locale == const Locale('en', 'US')
+                    ? consta.maxWidth * 0.075
+                    : null,
+                left: context.locale == const Locale('en', 'US')
+                    ? null
+                    : consta.maxWidth * 0.075,
                 child: Image.asset(
                   AppAssets.ideaIllu,
                   scale: 0.9,

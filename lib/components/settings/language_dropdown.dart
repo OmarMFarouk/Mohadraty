@@ -1,16 +1,21 @@
 import 'package:country_flags/country_flags.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mohadraty/src/app_colors.dart';
 
 class AppLang {
+  String countryCode;
   String langCode;
   String langTitle;
-  AppLang({required this.langCode, required this.langTitle});
+  AppLang(
+      {required this.countryCode,
+      required this.langCode,
+      required this.langTitle});
 }
 
 List<AppLang> appLangs = [
-  AppLang(langCode: 'us', langTitle: 'English'),
-  AppLang(langCode: 'eg', langTitle: 'عربي')
+  AppLang(countryCode: 'US', langCode: 'en', langTitle: 'English'),
+  AppLang(countryCode: 'EG', langCode: 'ar', langTitle: 'عربي')
 ];
 
 class LanguageDropDown extends StatelessWidget {
@@ -24,17 +29,20 @@ class LanguageDropDown extends StatelessWidget {
       height: kToolbarHeight,
       alignment: Alignment.bottomCenter,
       child: DropdownButtonFormField<AppLang>(
-        value: appLangs.first,
+        value: context.locale.languageCode == 'ar' ? appLangs[1] : appLangs[0],
         dropdownColor: AppColors.fillColor,
         alignment: Alignment.topCenter,
         decoration: const InputDecoration(border: InputBorder.none),
         items: appLangs.map((type) {
           return DropdownMenuItem(
+            onTap: () {
+              context.setLocale(Locale(type.langCode, type.countryCode));
+            },
             value: type,
             child: Row(
               children: [
                 CountryFlag.fromCountryCode(
-                  type.langCode,
+                  type.countryCode,
                   width: 32,
                   height: 32,
                 ),

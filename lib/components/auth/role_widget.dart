@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mohadraty/bloc/auth_bloc/auth_cubit.dart';
@@ -26,7 +27,7 @@ class RoleWidget extends StatelessWidget {
                   cubit.refreshState();
                 },
                 child: Ink(
-                  padding: EdgeInsets.all(5),
+                  padding: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
                       color: !cubit.isStudent
                           ? AppColors.primary
@@ -44,7 +45,7 @@ class RoleWidget extends StatelessWidget {
                             : AppColors.primary,
                       ),
                       Text(
-                        '\t\tTutor',
+                        '\t\t${context.tr('tutor')}',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
@@ -58,7 +59,7 @@ class RoleWidget extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 20,
           ),
           AnimatedContainer(
@@ -73,7 +74,7 @@ class RoleWidget extends StatelessWidget {
                 cubit.refreshState();
               },
               child: Ink(
-                padding: EdgeInsets.all(5),
+                padding: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
                     color: cubit.isStudent
                         ? AppColors.primary
@@ -90,7 +91,7 @@ class RoleWidget extends StatelessWidget {
                           cubit.isStudent ? AppColors.black : AppColors.primary,
                     ),
                     Text(
-                      '\t\tStudent',
+                      '\t\t${context.tr('student')}',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,

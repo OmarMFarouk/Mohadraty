@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mohadraty/components/class/lecture_tile.dart';
 import 'package:mohadraty/model/student_model.dart';
+import 'package:mohadraty/src/app_assets.dart';
 
 import '../../src/app_colors.dart';
 
@@ -57,8 +59,8 @@ class LectureSheet extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        "Lectures",
+                      Text(
+                        context.tr('lectures'),
                         style: TextStyle(
                             fontSize: 32,
                             color: Colors.white,
@@ -76,17 +78,19 @@ class LectureSheet extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  ListView.separated(
-                    itemCount: courseDetails.lectures!.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) => LecturesTile(
-                        index: index + 1,
-                        length: courseDetails.lectures!.length,
-                        consta: consta,
-                        lectureDetails: courseDetails.lectures![index]!),
-                    separatorBuilder: (context, index) =>
-                        SizedBox(height: consta.maxHeight * 0.02),
-                  ),
+                  courseDetails.lectures!.isEmpty
+                      ? Image.asset(AppAssets.notFoundIllu)
+                      : ListView.separated(
+                          itemCount: courseDetails.lectures!.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) => LecturesTile(
+                              index: index + 1,
+                              length: courseDetails.lectures!.length,
+                              consta: consta,
+                              lectureDetails: courseDetails.lectures![index]!),
+                          separatorBuilder: (context, index) =>
+                              SizedBox(height: consta.maxHeight * 0.02),
+                        ),
                 ],
               ),
             ));

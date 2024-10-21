@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
@@ -68,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             SizedBox(height: consta.maxHeight * 0.02),
                             Text(
-                              'Welcome Back, ${studentModel!.userInfo!.name}',
+                              '${context.tr('welcome_back')} ${studentModel!.userInfo!.name}',
                               style: const TextStyle(
                                   color: Color(0xffffffEF),
                                   fontWeight: FontWeight.bold,
@@ -93,23 +94,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                         children: [
                                           Expanded(
                                             child: SideButton(
-                                              cubit: cubit,
-                                              onTap: () {
-                                                AddClassDialog(
-                                                  idCont: cubit.idCont,
-                                                  codeCont: cubit.codeCont,
-                                                  onTap: () async => await cubit
-                                                      .joinClass()
-                                                      .then(
-                                                        (value) =>
-                                                            Navigator.pop(
-                                                                context),
-                                                      ),
-                                                ).show(context);
-                                              },
-                                              isRed: false,
-                                              title: 'Join Class',
-                                            ),
+                                                cubit: cubit,
+                                                onTap: () {
+                                                  AddClassDialog(
+                                                    idCont: cubit.idCont,
+                                                    codeCont: cubit.codeCont,
+                                                    onTap: () async =>
+                                                        await cubit
+                                                            .joinClass()
+                                                            .then(
+                                                              (value) =>
+                                                                  Navigator.pop(
+                                                                      context),
+                                                            ),
+                                                  ).show(context);
+                                                },
+                                                isRed: false,
+                                                title:
+                                                    context.tr('join_class')),
                                           ),
                                           SizedBox(
                                             height: consta.maxHeight * 0.02,
@@ -123,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   NavigatorAnimation
                                                       .slideAnimation),
                                               isRed: true,
-                                              title: 'My Classes',
+                                              title: context.tr('my_classes'),
                                             ),
                                           ),
                                         ],

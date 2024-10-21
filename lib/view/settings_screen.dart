@@ -1,12 +1,12 @@
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mohadraty/bloc/main_bloc/main_cubit.dart';
 import 'package:mohadraty/bloc/main_bloc/main_states.dart';
-import 'package:mohadraty/components/dashboard/courses_dropdown.dart';
 import 'package:mohadraty/components/settings/language_dropdown.dart';
 import 'package:mohadraty/components/settings/setting_field.dart';
 import 'package:mohadraty/src/app_colors.dart';
@@ -46,9 +46,9 @@ class _SettingScreenState extends State<SettingScreen> {
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      'Settings',
-                      style: TextStyle(
+                    Text(
+                      context.tr('settings'),
+                      style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 22),
@@ -152,7 +152,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                             onTap: () => launchUrl(Uri.parse(
                                                 AppEndPoints.privacy)),
                                             icon: Icons.policy_sharp,
-                                            hint: 'Policy'),
+                                            hint: context.tr('policy')),
                                       ),
                                       SizedBox(
                                         width: consta.maxWidth * 0.03,
@@ -162,7 +162,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                             onTap: () => launchUrl(
                                                 Uri.parse(AppEndPoints.terms)),
                                             icon: FontAwesomeIcons.legal,
-                                            hint: 'Terms'),
+                                            hint: context.tr('terms')),
                                       )
                                     ],
                                   ),
@@ -172,7 +172,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                           const NotificationScreen(),
                                           NavigatorAnimation.fadeAnimation),
                                       icon: Icons.notifications,
-                                      hint: 'Notifications'),
+                                      hint: context.tr('notification')),
                                   Row(
                                     children: [
                                       Expanded(
@@ -180,7 +180,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                             onTap: () {},
                                             icon: Icons.verified_sharp,
                                             hint:
-                                                'Ver: ${AppShared.appInfo.version}'),
+                                                '${context.locale == const Locale('en', 'US') ? context.tr('version').replaceRange(3, 7, '') : context.tr('version')}: ${AppShared.appInfo.version}'),
                                       ),
                                       SizedBox(
                                         width: consta.maxWidth * 0.03,
@@ -193,7 +193,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                               Restart.restartApp();
                                             },
                                             icon: FontAwesomeIcons.signOut,
-                                            hint: 'Logout'),
+                                            hint: context.tr('logout')),
                                       )
                                     ],
                                   ),

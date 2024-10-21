@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mohadraty/components/auth/button.dart';
 import 'package:mohadraty/src/app_assets.dart';
@@ -19,9 +20,9 @@ class WelcomeScreen extends StatelessWidget {
               AppAssets.logo,
               scale: 7,
             ),
-            const Center(
+            Center(
               child: Text(
-                'Welcome to Mohadraty',
+                context.tr('welcome'),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -33,18 +34,20 @@ class WelcomeScreen extends StatelessWidget {
             ),
             const SizedBox(height: kToolbarHeight * 0.5),
             AuthButton(
-                consta: consta,
-                onTap: () => pageController.animateToPage(1,
-                    curve: Curves.fastLinearToSlowEaseIn,
-                    duration: const Duration(milliseconds: 350)),
-                hint: 'Login'),
+              consta: consta,
+              onTap: () => pageController.animateToPage(1,
+                  curve: Curves.fastLinearToSlowEaseIn,
+                  duration: const Duration(milliseconds: 350)),
+              hint: context.tr('login'),
+            ),
             const SizedBox(height: kToolbarHeight * 0.5),
             AuthButton(
-                consta: consta,
-                onTap: () => pageController.animateToPage(2,
-                    curve: Curves.fastLinearToSlowEaseIn,
-                    duration: const Duration(milliseconds: 350)),
-                hint: 'Register'),
+              consta: consta,
+              onTap: () => pageController.animateToPage(2,
+                  curve: Curves.fastLinearToSlowEaseIn,
+                  duration: const Duration(milliseconds: 350)),
+              hint: context.tr('signup'),
+            ),
           ],
         ),
       );

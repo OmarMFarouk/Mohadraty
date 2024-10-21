@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mohadraty/bloc/main_bloc/main_cubit.dart';
@@ -56,9 +57,9 @@ class _SplashScreenState extends State<SplashScreen> {
                     spreadRadius: 120,
                     blurRadius: 80)
               ]),
-              child: const Text(
-                'Mohadraty',
-                style: TextStyle(
+              child: Text(
+                context.tr('app_title'),
+                style: const TextStyle(
                   fontSize: 37,
                   fontWeight: FontWeight.bold,
                   color: AppColors.goldish,

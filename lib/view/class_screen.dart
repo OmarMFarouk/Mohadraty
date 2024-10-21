@@ -1,5 +1,6 @@
 // ignore_for_file: unused_import
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -49,8 +50,8 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen> {
               appBar: AppBar(
                 foregroundColor: Colors.white,
                 backgroundColor: Colors.transparent,
-                title: const Text(
-                  'Class Details',
+                title: Text(
+                  context.tr('course_details'),
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mohadraty/components/auth/button.dart';
 import 'package:mohadraty/components/auth/formfield.dart';
@@ -34,9 +35,9 @@ class AddClassDialog extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              const Text(
-                'Enter Class Code',
-                style: TextStyle(
+              Text(
+                context.tr('join_class'),
+                style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                     color: Colors.white),
@@ -45,7 +46,7 @@ class AddClassDialog extends StatelessWidget {
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: AuthField(
-                      hint: 'Course Code',
+                      hint: context.tr('course_code'),
                       controller: codeCont!,
                       validator: (s) {
                         if (s!.isEmpty) {
@@ -56,7 +57,7 @@ class AddClassDialog extends StatelessWidget {
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: AuthField(
-                      hint: 'Student ID',
+                      hint: context.tr('student_code'),
                       controller: idCont!,
                       validator: (s) {
                         if (s!.isEmpty) {
@@ -71,7 +72,7 @@ class AddClassDialog extends StatelessWidget {
                       onTap!();
                     }
                   },
-                  hint: 'Join')
+                  hint: context.tr('join'))
             ],
           ),
         ),

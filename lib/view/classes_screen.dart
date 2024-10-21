@@ -1,9 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mohadraty/bloc/main_bloc/main_cubit.dart';
 import 'package:mohadraty/bloc/main_bloc/main_states.dart';
 import 'package:mohadraty/components/class/class_tile.dart';
 import 'package:mohadraty/components/dashboard/dash_class_tile.dart';
+import 'package:mohadraty/src/app_assets.dart';
 import 'package:mohadraty/src/app_colors.dart';
 
 class ClasessScreen extends StatefulWidget {
@@ -27,9 +29,9 @@ class _ClasessScreenState extends State<ClasessScreen> {
               appBar: AppBar(
                 foregroundColor: Colors.white,
                 backgroundColor: Colors.transparent,
-                title: const Text(
-                  'Classes',
-                  style: TextStyle(
+                title: Text(
+                  context.tr('my_classes').split(' ').last,
+                  style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 22),
@@ -102,9 +104,9 @@ class _ClasessScreenState extends State<ClasessScreen> {
                                         children: [
                                           Column(
                                             children: [
-                                              const Text(
-                                                "Active Classes",
-                                                style: TextStyle(
+                                              Text(
+                                                context.tr('active_courses'),
+                                                style: const TextStyle(
                                                     fontSize: 32,
                                                     color: Colors.white,
                                                     fontWeight:
@@ -114,43 +116,54 @@ class _ClasessScreenState extends State<ClasessScreen> {
                                                   height:
                                                       consta.maxHeight * 0.02),
                                               Expanded(
-                                                child: ListView.separated(
-                                                    separatorBuilder:
-                                                        (context, index) =>
-                                                            const SizedBox(
-                                                                height: 15),
-                                                    itemCount: !widget.isDash
-                                                        ? studentModel!
-                                                            .enabledCourses!
-                                                            .length
-                                                        : tutorModel!
-                                                            .enabledCourses!
-                                                            .length,
-                                                    itemBuilder:
-                                                        (context, index) {
-                                                      return widget.isDash
-                                                          ? DashClassTile(
-                                                              consta: consta,
-                                                              courseDetails:
-                                                                  tutorModel!
-                                                                          .enabledCourses![
-                                                                      index]!)
-                                                          : ClassTile(
-                                                              isHome: false,
-                                                              consta: consta,
-                                                              courseDetails:
-                                                                  studentModel!
-                                                                          .enabledCourses![
-                                                                      index]!);
-                                                    }),
+                                                child: studentModel != null &&
+                                                            studentModel!
+                                                                .enabledCourses!
+                                                                .isEmpty ||
+                                                        tutorModel != null &&
+                                                            tutorModel!
+                                                                .enabledCourses!
+                                                                .isEmpty
+                                                    ? Image.asset(
+                                                        AppAssets.notFoundIllu)
+                                                    : ListView.separated(
+                                                        separatorBuilder:
+                                                            (context, index) =>
+                                                                const SizedBox(
+                                                                    height: 15),
+                                                        itemCount: !widget.isDash
+                                                            ? studentModel!
+                                                                .enabledCourses!
+                                                                .length
+                                                            : tutorModel!
+                                                                .enabledCourses!
+                                                                .length,
+                                                        itemBuilder: (context, index) {
+                                                          return widget.isDash
+                                                              ? DashClassTile(
+                                                                  consta:
+                                                                      consta,
+                                                                  courseDetails:
+                                                                      tutorModel!
+                                                                              .enabledCourses![
+                                                                          index]!)
+                                                              : ClassTile(
+                                                                  isHome: false,
+                                                                  consta:
+                                                                      consta,
+                                                                  courseDetails:
+                                                                      studentModel!
+                                                                              .enabledCourses![
+                                                                          index]!);
+                                                        }),
                                               )
                                             ],
                                           ),
                                           Column(
                                             children: [
-                                              const Text(
-                                                "Inactive Classes",
-                                                style: TextStyle(
+                                              Text(
+                                                context.tr('inactive_courses'),
+                                                style: const TextStyle(
                                                     fontSize: 32,
                                                     color: Colors.white,
                                                     fontWeight:
@@ -160,35 +173,46 @@ class _ClasessScreenState extends State<ClasessScreen> {
                                                   height:
                                                       consta.maxHeight * 0.02),
                                               Expanded(
-                                                child: ListView.separated(
-                                                    separatorBuilder:
-                                                        (context, index) =>
-                                                            const SizedBox(
-                                                                height: 15),
-                                                    itemCount: !widget.isDash
-                                                        ? studentModel!
-                                                            .disabledCourses!
-                                                            .length
-                                                        : tutorModel!
-                                                            .disabledCourses!
-                                                            .length,
-                                                    itemBuilder:
-                                                        (context, index) {
-                                                      return widget.isDash
-                                                          ? DashClassTile(
-                                                              consta: consta,
-                                                              courseDetails:
-                                                                  tutorModel!
-                                                                          .disabledCourses![
-                                                                      index]!)
-                                                          : ClassTile(
-                                                              isHome: false,
-                                                              consta: consta,
-                                                              courseDetails:
-                                                                  studentModel!
-                                                                          .disabledCourses![
-                                                                      index]!);
-                                                    }),
+                                                child: studentModel != null &&
+                                                            studentModel!
+                                                                .disabledCourses!
+                                                                .isEmpty ||
+                                                        tutorModel != null &&
+                                                            tutorModel!
+                                                                .disabledCourses!
+                                                                .isEmpty
+                                                    ? Image.asset(
+                                                        AppAssets.notFoundIllu)
+                                                    : ListView.separated(
+                                                        separatorBuilder:
+                                                            (context, index) =>
+                                                                const SizedBox(
+                                                                    height: 15),
+                                                        itemCount: !widget.isDash
+                                                            ? studentModel!
+                                                                .disabledCourses!
+                                                                .length
+                                                            : tutorModel!
+                                                                .disabledCourses!
+                                                                .length,
+                                                        itemBuilder: (context, index) {
+                                                          return widget.isDash
+                                                              ? DashClassTile(
+                                                                  consta:
+                                                                      consta,
+                                                                  courseDetails:
+                                                                      tutorModel!
+                                                                              .disabledCourses![
+                                                                          index]!)
+                                                              : ClassTile(
+                                                                  isHome: false,
+                                                                  consta:
+                                                                      consta,
+                                                                  courseDetails:
+                                                                      studentModel!
+                                                                              .disabledCourses![
+                                                                          index]!);
+                                                        }),
                                               )
                                             ],
                                           ),
