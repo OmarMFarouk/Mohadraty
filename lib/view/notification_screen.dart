@@ -1,10 +1,13 @@
 import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mohadraty/bloc/main_bloc/main_cubit.dart';
 import 'package:mohadraty/bloc/main_bloc/main_states.dart';
 import 'package:mohadraty/components/settings/notification_tile.dart';
+import 'package:mohadraty/src/app_assets.dart';
+import 'package:mohadraty/src/app_colors.dart';
 import 'package:mohadraty/src/app_shared.dart';
 
 class NotificationScreen extends StatefulWidget {
@@ -42,9 +45,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
               appBar: AppBar(
                 foregroundColor: Colors.white,
                 backgroundColor: Colors.transparent,
-                title: const Text(
-                  'Notifications',
-                  style: TextStyle(
+                title: Text(
+                  context.tr('notification'),
+                  style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 22),
@@ -81,9 +84,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                       ),
                                     ],
                                   ),
-                                  const Text(
-                                    "Recent",
-                                    style: TextStyle(
+                                  Text(
+                                    context.tr('recent'),
+                                    style: const TextStyle(
                                         fontSize: 32,
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold),
@@ -91,21 +94,36 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   const SizedBox(
                                     height: 20,
                                   ),
-                                  Expanded(
-                                    child: ListView.separated(
-                                      itemCount: notes.length,
-                                      shrinkWrap: true,
-                                      itemBuilder: (context, index) =>
-                                          NotificationsTile(
-                                        date: dates[index],
-                                        title: notes[index],
-                                        consta: consta,
+                                  if (notes.isEmpty)
+                                    Column(
+                                      children: [
+                                        Image.asset(AppAssets.notFoundIllu),
+                                        Text(
+                                          context.tr('empty'),
+                                          style: const TextStyle(
+                                              fontSize: 32,
+                                              color: AppColors.grey,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    )
+                                  else
+                                    Expanded(
+                                      child: ListView.separated(
+                                        itemCount: notes.length,
+                                        shrinkWrap: true,
+                                        itemBuilder: (context, index) =>
+                                            NotificationsTile(
+                                          date: dates[index],
+                                          title: notes[index],
+                                          consta: consta,
+                                        ),
+                                        separatorBuilder: (context, index) =>
+                                            SizedBox(
+                                                height:
+                                                    consta.maxHeight * 0.02),
                                       ),
-                                      separatorBuilder: (context, index) =>
-                                          SizedBox(
-                                              height: consta.maxHeight * 0.02),
                                     ),
-                                  ),
                                 ],
                               ),
                             ),

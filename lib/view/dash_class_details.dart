@@ -1,5 +1,6 @@
 // ignore_for_file: unused_import
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -51,9 +52,9 @@ class _DashClassDetailsScreenState extends State<DashClassDetailsScreen> {
               appBar: AppBar(
                 foregroundColor: Colors.white,
                 backgroundColor: Colors.transparent,
-                title: const Text(
-                  'Class Details',
-                  style: TextStyle(
+                title: Text(
+                  context.tr('course_details'),
+                  style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 22),
@@ -110,10 +111,17 @@ class _DashClassDetailsScreenState extends State<DashClassDetailsScreen> {
                       Expanded(
                         flex: 1,
                         child: Container(
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                               color: AppColors.fillColor,
                               borderRadius: BorderRadius.horizontal(
-                                  right: Radius.circular(15))),
+                                  right: Radius.circular(
+                                      context.locale == const Locale('en', 'US')
+                                          ? 15
+                                          : 0),
+                                  left: Radius.circular(
+                                      context.locale == const Locale('en', 'US')
+                                          ? 0
+                                          : 15))),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

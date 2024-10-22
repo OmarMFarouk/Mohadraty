@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -44,9 +45,9 @@ class _CreateClassSheetState extends State<CreateClassSheet> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              const Text(
-                'Fill Required Fields.',
-                style: TextStyle(
+              Text(
+                context.tr('fill_msg'),
+                style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                     color: Colors.white),
@@ -82,7 +83,7 @@ class _CreateClassSheetState extends State<CreateClassSheet> {
               ),
               DashField(
                   enabled: true,
-                  hint: 'Course Title',
+                  hint: context.tr('course_title'),
                   validator: (d) {
                     if (d!.isEmpty) {
                       return '*Field is required.';
@@ -96,7 +97,7 @@ class _CreateClassSheetState extends State<CreateClassSheet> {
                   controller: widget.titleCont!),
               DashField(
                   enabled: true,
-                  hint: 'Course Code',
+                  hint: context.tr('course_code'),
                   validator: (d) {
                     if (d!.isEmpty) {
                       return '*Field is required.';
@@ -113,7 +114,7 @@ class _CreateClassSheetState extends State<CreateClassSheet> {
                   Expanded(
                     child: DashField(
                         enabled: false,
-                        hint: 'Start Date',
+                        hint: context.tr('start_date'),
                         validator: (d) {
                           if (d!.isEmpty) {
                             return '*Field is required.';
@@ -141,7 +142,7 @@ class _CreateClassSheetState extends State<CreateClassSheet> {
                   Expanded(
                     child: DashField(
                         enabled: false,
-                        hint: 'End Date',
+                        hint: context.tr('start_date'),
                         validator: (d) {
                           if (d!.isEmpty) {
                             return '*Field is required.';
@@ -188,7 +189,7 @@ class _CreateClassSheetState extends State<CreateClassSheet> {
                       Fluttertoast.showToast(msg: 'Fill all requirements');
                     }
                   },
-                  hint: 'Create')
+                  hint: context.tr('create'))
             ],
           ),
         ),

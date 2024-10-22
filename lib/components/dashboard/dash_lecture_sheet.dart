@@ -1,8 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:mohadraty/components/class/lecture_tile.dart';
 import 'package:mohadraty/components/dashboard/dash_enrolment_tile.dart';
 import 'package:mohadraty/components/dashboard/dash_lecture_tile.dart';
-import 'package:mohadraty/model/student_model.dart';
 import 'package:mohadraty/model/tutor_model.dart';
 
 import '../../src/app_colors.dart';
@@ -72,8 +71,10 @@ class _DashLectureSheetState extends State<DashLectureSheet> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            currentIndex == 0 ? 'Students' : "Lectures",
-                            style: TextStyle(
+                            currentIndex == 0
+                                ? context.tr('student')
+                                : context.tr('lectures'),
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),
@@ -93,8 +94,10 @@ class _DashLectureSheetState extends State<DashLectureSheet> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  currentIndex == 0 ? "Lectures" : "Students",
-                  style: TextStyle(
+                  currentIndex == 0
+                      ? context.tr('lectures')
+                      : context.tr("student"),
+                  style: const TextStyle(
                     fontSize: 32,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -125,7 +128,7 @@ class _DashLectureSheetState extends State<DashLectureSheet> {
                 scrollDirection: Axis.horizontal,
                 children: [
                   ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: widget.courseDetails.lectures!.length,
                     shrinkWrap: true,
                     itemBuilder: (context, index) => DashLecturesTile(
@@ -136,7 +139,7 @@ class _DashLectureSheetState extends State<DashLectureSheet> {
                     ),
                   ),
                   ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: widget.courseDetails.acceptedEnrolments!.length,
                     shrinkWrap: true,
                     itemBuilder: (context, index) => DashEnrolmentTile(

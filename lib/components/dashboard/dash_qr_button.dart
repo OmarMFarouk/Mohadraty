@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mohadraty/components/dashboard/create_lecture_sheet.dart';
 import 'package:mohadraty/src/app_colors.dart';
@@ -31,17 +32,17 @@ class DashQrButton extends StatelessWidget {
                 scale: 1.75, image: AssetImage(AppAssets.scanQrIcon)),
             borderRadius: BorderRadius.circular(15),
             color: AppColors.primary),
-        child: const Column(
+        child: Column(
           children: [
             Text(
-              'Create Qr-Code',
-              style: TextStyle(
+              context.tr('create_qr'),
+              style: const TextStyle(
                   color: Color(0xff131a0b),
                   fontWeight: FontWeight.bold,
                   fontSize: 18),
             ),
-            Spacer(),
-            Align(
+            const Spacer(),
+            const Align(
               alignment: Alignment.bottomRight,
               child: Icon(
                 Icons.chevron_right,

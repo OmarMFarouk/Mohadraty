@@ -52,7 +52,7 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen> {
                 backgroundColor: Colors.transparent,
                 title: Text(
                   context.tr('course_details'),
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 22),
@@ -108,10 +108,18 @@ class _ClassDetailsScreenState extends State<ClassDetailsScreen> {
                       Expanded(
                         flex: 1,
                         child: Container(
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                               color: AppColors.fillColor,
                               borderRadius: BorderRadius.horizontal(
-                                  right: Radius.circular(15))),
+                                left: Radius.circular(
+                                    context.locale == const Locale('en', 'US')
+                                        ? 0
+                                        : 15),
+                                right: Radius.circular(
+                                    context.locale == const Locale('en', 'US')
+                                        ? 15
+                                        : 0),
+                              )),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mohadraty/components/auth/button.dart';
@@ -40,15 +41,15 @@ class _CreateLectureSheetState extends State<CreateLectureSheet> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              const Text(
-                'Fill Required Fields.',
-                style: TextStyle(
+              Text(
+                context.tr('fill_msg'),
+                style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                     color: Colors.white),
               ),
-              const Text(
-                'Students must be in a 200 meters radius.',
+              Text(
+                context.tr('location_msg'),
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
@@ -56,7 +57,7 @@ class _CreateLectureSheetState extends State<CreateLectureSheet> {
               ),
               DashField(
                   enabled: true,
-                  hint: 'Lecture Title',
+                  hint: context.tr('lecture_title'),
                   validator: (d) {
                     if (d!.isEmpty) {
                       return '*Field is required.';
@@ -69,9 +70,9 @@ class _CreateLectureSheetState extends State<CreateLectureSheet> {
                   icon: Icons.title,
                   controller: widget.titleCont),
               const CoursesDropDown(),
-              const Text(
-                'Pick Qr Expiry Duration',
-                style: TextStyle(
+              Text(
+                context.tr('qr_duration'),
+                style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     color: AppColors.grey,
                     fontSize: 16),
@@ -87,7 +88,7 @@ class _CreateLectureSheetState extends State<CreateLectureSheet> {
                       Fluttertoast.showToast(msg: 'Fill all requirements');
                     }
                   },
-                  hint: 'Create')
+                  hint: context.tr('create'))
             ],
           ),
         ),

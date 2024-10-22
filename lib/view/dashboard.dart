@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
@@ -74,7 +75,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           children: [
                             SizedBox(height: consta.maxHeight * 0.02),
                             Text(
-                              'Welcome Back, ${tutorModel!.tutorInfo!.fullName}',
+                              '${context.tr('welcome_back')} ${tutorModel!.tutorInfo!.fullName}',
                               style: const TextStyle(
                                   color: Color(0xffffffEF),
                                   fontWeight: FontWeight.bold,
@@ -121,26 +122,27 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                                     )));
                                               },
                                               isRed: false,
-                                              title: 'Create Class',
+                                              title:
+                                                  context.tr('create_course'),
                                             ),
                                           ),
                                           SizedBox(
                                             height: consta.maxHeight * 0.02,
                                           ),
                                           Expanded(
-                                            child: SideButton(
-                                              cubit: cubit,
-                                              onTap: () => AppNavigator.push(
-                                                  context,
-                                                  const ClasessScreen(
-                                                    isDash: true,
-                                                  ),
-                                                  NavigatorAnimation
-                                                      .slideAnimation),
-                                              isRed: true,
-                                              title: 'My Classes',
-                                            ),
-                                          ),
+                                              child: SideButton(
+                                                  cubit: cubit,
+                                                  onTap: () =>
+                                                      AppNavigator.push(
+                                                          context,
+                                                          const ClasessScreen(
+                                                            isDash: true,
+                                                          ),
+                                                          NavigatorAnimation
+                                                              .slideAnimation),
+                                                  isRed: true,
+                                                  title: context
+                                                      .tr('my_classes'))),
                                         ],
                                       ),
                                     )

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../src/app_colors.dart';
@@ -22,37 +23,37 @@ class _DayPickerState extends State<DayPicker> {
       child: Row(
         children: [
           DayBall(
-            hint: 'Saturday',
+            hint: context.tr('saturday'),
             onTap: () => onSelect('Saturday', context, setState),
             isSelected: isSelected('Saturday'),
           ),
           DayBall(
-            hint: 'Sunday',
+            hint: context.tr('sunday'),
             onTap: () => onSelect('Sunday', context, setState),
             isSelected: isSelected('Sunday'),
           ),
           DayBall(
-            hint: 'Monday',
+            hint: context.tr('monday'),
             onTap: () => onSelect('Monday', context, setState),
             isSelected: isSelected('Monday'),
           ),
           DayBall(
-            hint: 'Tuesday',
+            hint: context.tr('tuesday'),
             onTap: () => onSelect('Tuesday', context, setState),
             isSelected: isSelected('Tuesday'),
           ),
           DayBall(
-            hint: 'Wednesday',
+            hint: context.tr('wednesday'),
             onTap: () => onSelect('Wednesday', context, setState),
             isSelected: isSelected('Wednesday'),
           ),
           DayBall(
-            hint: 'Thursday',
+            hint: context.tr('thursday'),
             onTap: () => onSelect('Thursday', context, setState),
             isSelected: isSelected('Thursday'),
           ),
           DayBall(
-            hint: 'Friday',
+            hint: context.tr('friday'),
             onTap: () => onSelect('Friday', context, setState),
             isSelected: isSelected('Friday'),
           ),
@@ -117,7 +118,8 @@ class DayBall extends StatelessWidget {
           child: Text(
             hint.replaceRange(3, hint.length, ''),
             style: TextStyle(
-              fontSize: MediaQuery.sizeOf(context).width * 0.035,
+              fontSize: MediaQuery.sizeOf(context).width *
+                  (context.locale == const Locale("en", "US") ? 0.035 : 0.03),
               fontWeight: FontWeight.bold,
               color: isSelected ? AppColors.black : Colors.white,
             ),

@@ -47,12 +47,15 @@ class _HomeScreenState extends State<HomeScreen> {
               preferredSize: Size.fromHeight(kToolbarHeight),
               child: HomeAppBar(),
             ),
-            backgroundColor: const Color(0xFF141416),
-            bottomSheet: ClassesSheet(
-                cubit: cubit,
-                isDash: false,
-                consta: consta,
-                controller: draggableScrollableController),
+            backgroundColor: AppColors.black,
+            bottomSheet: Material(
+              color: AppColors.black,
+              child: ClassesSheet(
+                  cubit: cubit,
+                  isDash: false,
+                  consta: consta,
+                  controller: draggableScrollableController),
+            ),
             body: LayoutBuilder(builder: (context, consta) {
               return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -121,7 +124,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                               cubit: cubit,
                                               onTap: () => AppNavigator.push(
                                                   context,
-                                                  ClasessScreen(isDash: false),
+                                                  const ClasessScreen(
+                                                      isDash: false),
                                                   NavigatorAnimation
                                                       .slideAnimation),
                                               isRed: true,
